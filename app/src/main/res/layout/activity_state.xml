@@ -24,6 +24,14 @@
             android:padding="20dp">
 
             <TextView
+                android:id="@+id/state_name_textview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/avenir"
+                android:textSize="18sp"
+                android:textColor="@color/black"/>
+
+            <TextView
                 android:id="@+id/state_confirmed_textview"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

@@ -4,6 +4,9 @@ import com.google.gson.annotations.SerializedName
 
 class State {
 
+    @SerializedName("state")
+    lateinit var name: String
+
     @SerializedName("statecode")
     lateinit var statecode: String
 
