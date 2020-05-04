@@ -19,6 +19,7 @@ import com.github.mikephil.charting.charts.LineChart
 import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.data.LineData
 import com.github.mikephil.charting.data.LineDataSet
+import kotlinx.android.synthetic.main.fragment_home.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -29,13 +30,6 @@ import java.text.DecimalFormat
 class HomeFragment : Fragment() {
 
     private lateinit var root: View
-
-    //UI
-    private lateinit var mDeathTextView: TextView
-    private lateinit var mConfirmedTextView: TextView
-    private lateinit var mRecoveredTextView: TextView
-    private lateinit var mProgressBar: ProgressBar
-    private lateinit var mLineChart: LineChart
 
     //Variables
     private lateinit var mCoronaService: CoronaService
@@ -54,8 +48,6 @@ class HomeFragment : Fragment() {
 
         (activity as MainActivity).supportActionBar?.title="Home"
 
-        initView()
-
         retrofitOperations()
 
         updateTextView()
@@ -63,19 +55,9 @@ class HomeFragment : Fragment() {
         return root
     }
 
-    private fun initView() {
-
-        mDeathTextView = root.findViewById(R.id.deaths_textview)
-        mConfirmedTextView = root.findViewById(R.id.confirmed_textview)
-        mRecoveredTextView = root.findViewById(R.id.recovered_textview)
-        mProgressBar = root.findViewById(R.id.progress_bar)
-        mLineChart=root.findViewById(R.id.line_chart)
-
-    }
-
     private fun updateTextView() {
 
-        mProgressBar.visibility = View.VISIBLE
+        progress_bar?.visibility = View.VISIBLE
 
         val call = mCoronaService.getResults()
         call.enqueue(object : Callback<ApiResponse> {
@@ -95,19 +77,19 @@ class HomeFragment : Fragment() {
                     mStates = apiResponse?.states!!
                     mDataPerDays = apiResponse.dataPerDays
 
-                    mProgressBar.visibility = View.GONE
+                    progress_bar.visibility = View.GONE
 
-                    mDeathTextView.setText(
+                    deaths_textview.setText(
                         "Deaths: " + DecimalFormat("##,##,###").format(
                             mStates?.get(0)?.deaths
                         ).toString()
                     )
-                    mConfirmedTextView.setText(
+                    confirmed_textview.setText(
                         "Confirmed:" + DecimalFormat("##,##,###").format(
                             mStates?.get(0)?.confirmed
                         ).toString()
                     )
-                    mRecoveredTextView.setText(
+                    recovered_textview.setText(
                         "Recovered:" + DecimalFormat("##,##,###").format(
                             mStates?.get(0)?.recovered
                         ).toString()
@@ -118,7 +100,7 @@ class HomeFragment : Fragment() {
 
                 } else {
 
-                    mProgressBar.visibility = View.GONE
+                    progress_bar.visibility = View.GONE
                     Log.v("tag", "unsuccessful")
 
                 }
@@ -185,10 +167,10 @@ class HomeFragment : Fragment() {
         mLineData.addDataSet(deceasedDataSet)
         mLineData.addDataSet(recoveredDataSet)
 
-        mLineChart.description.text="Number of days"
+        line_chart.description.text="Number of days"
 
-        mLineChart.data= mLineData
-        mLineChart.invalidate()
+        line_chart.data= mLineData
+        line_chart.invalidate()
 
     }
 

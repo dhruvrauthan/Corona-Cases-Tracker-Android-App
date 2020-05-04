@@ -12,6 +12,8 @@ import com.example.coronatracker.R
 import com.example.coronatracker.fragments.SearchFragment
 import com.example.coronatracker.models.ApiResponse
 import com.example.coronatracker.models.State
+import kotlinx.android.synthetic.main.activity_state.*
+import kotlinx.android.synthetic.main.fragment_home.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -20,13 +22,6 @@ import retrofit2.converter.gson.GsonConverterFactory
 import java.text.DecimalFormat
 
 class StateActivity : AppCompatActivity() {
-
-    //UI
-    private lateinit var mDeathTextView: TextView
-    private lateinit var mConfirmedTextView: TextView
-    private lateinit var mRecoveredTextView: TextView
-    private lateinit var mProgressBar: ProgressBar
-    private lateinit var mStateNameTextView: TextView
 
     //Variables
     private lateinit var mCoronaService: CoronaService
@@ -42,8 +37,6 @@ class StateActivity : AppCompatActivity() {
 
         val intent = intent
         mPosition = intent.getIntExtra("pos", 0)
-
-        initView()
 
         setStateCode()
 
@@ -101,7 +94,7 @@ class StateActivity : AppCompatActivity() {
 
     private fun updateTextView() {
 
-        mProgressBar.visibility = View.VISIBLE
+        state_progress_bar.visibility = View.VISIBLE
 
         val call = mCoronaService.getResults()
         call.enqueue(object : Callback<ApiResponse> {
@@ -125,7 +118,7 @@ class StateActivity : AppCompatActivity() {
 
                 } else {
 
-                    mProgressBar.visibility = View.GONE
+                    state_progress_bar.visibility = View.GONE
                     Log.v("tag", "unsuccessful")
 
                 }
@@ -157,25 +150,25 @@ class StateActivity : AppCompatActivity() {
 
         }
 
-        mStateNameTextView.setText(name)
+        state_name_textview.setText(name)
 
-        mDeathTextView.setText(
+        state_deaths_textview.setText(
             "Deaths: " + DecimalFormat("##,##,###").format(
                 deaths
             ).toString()
         )
-        mConfirmedTextView.setText(
+        state_confirmed_textview.setText(
             "Confirmed: " + DecimalFormat("##,##,###").format(
                 confirmed
             ).toString()
         )
-        mRecoveredTextView.setText(
+        state_recovered_textview.setText(
             "Recovered: " + DecimalFormat("##,##,###").format(
                 recovered
             ).toString()
         )
 
-        mProgressBar.visibility = View.GONE
+        state_progress_bar.visibility = View.GONE
 
     }
 
@@ -187,16 +180,6 @@ class StateActivity : AppCompatActivity() {
             .build()
 
         mCoronaService = retrofit.create(CoronaService::class.java)
-    }
-
-    private fun initView() {
-
-        mStateNameTextView = findViewById(R.id.state_name_textview)
-        mDeathTextView = findViewById(R.id.state_deaths_textview)
-        mConfirmedTextView = findViewById(R.id.state_confirmed_textview)
-        mRecoveredTextView = findViewById(R.id.state_recovered_textview)
-        mProgressBar = findViewById(R.id.state_progress_bar)
-
     }
 
     override fun onBackPressed() {
