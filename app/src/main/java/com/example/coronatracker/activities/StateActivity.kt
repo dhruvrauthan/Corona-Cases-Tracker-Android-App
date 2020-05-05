@@ -5,15 +5,11 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.widget.ProgressBar
-import android.widget.TextView
 import com.example.coronatracker.CoronaService
 import com.example.coronatracker.R
-import com.example.coronatracker.fragments.SearchFragment
 import com.example.coronatracker.models.ApiResponse
 import com.example.coronatracker.models.State
 import kotlinx.android.synthetic.main.activity_state.*
-import kotlinx.android.synthetic.main.fragment_home.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response

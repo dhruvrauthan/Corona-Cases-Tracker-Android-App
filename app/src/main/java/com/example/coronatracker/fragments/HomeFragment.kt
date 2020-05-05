@@ -1,13 +1,11 @@
 package com.example.coronatracker.fragments
 
-import android.graphics.Color
+import  android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ProgressBar
-import android.widget.TextView
 import androidx.fragment.app.Fragment
 import com.example.coronatracker.CoronaService
 import com.example.coronatracker.R
@@ -15,7 +13,6 @@ import com.example.coronatracker.activities.MainActivity
 import com.example.coronatracker.models.ApiResponse
 import com.example.coronatracker.models.DataPerDay
 import com.example.coronatracker.models.State
-import com.github.mikephil.charting.charts.LineChart
 import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.data.LineData
 import com.github.mikephil.charting.data.LineDataSet
@@ -150,16 +147,13 @@ class HomeFragment : Fragment() {
         recoveredDataSet.setDrawValues(false)
 
         confirmedDataSet.color = Color.GRAY
-        confirmedDataSet.setCircleColor(Color.GRAY)
         confirmedDataSet.setDrawCircles(false)
 
         deceasedDataSet.color = Color.RED
-        deceasedDataSet.setCircleColor(Color.RED)
         deceasedDataSet.setDrawCircles(false)
 
         recoveredDataSet.color = Color.GREEN
         recoveredDataSet.setDrawCircles(false)
-        recoveredDataSet.setCircleColor(Color.GREEN)
 
         val mLineData = LineData()
 
